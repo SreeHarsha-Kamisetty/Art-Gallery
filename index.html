@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/normalize.css" />
+    <link rel="stylesheet" href="styles/skeleton.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <title>ArtVista</title>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="column">
+          <h1>ArtVista 🎨</h1>
+          <i>ArtVista</i>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="columns four sidebar-one" id="sidebar-one">
+          <h4>Add Arts</h4>
+          <input
+            type="text"
+            id="art-title"
+            class="u-full-width"
+            placeholder="title"
+          />
+          <input
+            type="text"
+            id="art-image"
+            class="u-full-width"
+            placeholder="image"
+          />
+          <input
+            type="text"
+            id="art-artist"
+            class="u-full-width"
+            placeholder="artist"
+          />
+          <input
+            type="number"
+            id="art-year"
+            class="u-full-width"
+            placeholder="year"
+          />
+          <input
+            type="text"
+            id="art-paintbrushes"
+            class="u-full-width"
+            placeholder="paintbrushes"
+          />
+          <input
+            type="number"
+            id="art-price"
+            class="u-full-width"
+            placeholder="price"
+          />
+          <input
+            type="text"
+            id="art-medium"
+            class="u-full-width"
+            placeholder="medium"
+          />
+          <button id="add-art" class="u-full-width button button-primary">
+            Add Arts
+          </button>
+          <hr />
+
+          <h4>update all fields of Arts</h4>
+          <input
+            type="text"
+            id="update-art-id"
+            class="u-full-width"
+            placeholder="ID"
+          />
+          <input
+            type="text"
+            id="update-art-title"
+            class="u-full-width"
+            placeholder="title"
+          />
+          <input
+            type="text"
+            id="update-art-image"
+            class="u-full-width"
+            placeholder="image"
+          />
+          <input
+            type="text"
+            id="update-art-artist"
+            class="u-full-width"
+            placeholder="artist"
+          />
+          <input
+            type="number"
+            id="update-art-year"
+            class="u-full-width"
+            placeholder="year"
+          />
+          <input
+            type="text"
+            id="update-art-paintbrushes"
+            class="u-full-width"
+            placeholder="paintbrushes"
+          />
+          <input
+            type="number"
+            id="update-art-price"
+            class="u-full-width"
+            placeholder="price"
+          />
+          <input
+            type="text"
+            id="update-art-medium"
+            class="u-full-width"
+            placeholder="medium"
+          />
+          <button id="update-art" class="u-full-width button button-primary">
+            Update all fields
+          </button>
+          <hr />
+
+          <h4>update only price</h4>
+          <input
+            type="text"
+            id="update-package-art-id"
+            class="u-full-width"
+            placeholder="ID"
+          />
+          <input
+            type="number"
+            id="update-package-art-package"
+            class="u-full-width"
+            placeholder="price"
+          />
+          <button
+            id="update-package-art"
+            class="u-full-width button button-primary"
+          >
+            Update art price
+          </button>
+          <hr />
+
+          <h4>Sort Based On Price</h4>
+          <button
+            id="sort-low-to-high"
+            class="u-full-width button button-primary"
+          >
+            Sort Low To High
+          </button>
+          <button
+            id="sort-high-to-low"
+            class="u-full-width button button-primary"
+          >
+            Sort High To Low
+          </button>
+          <hr />
+
+          <h4>Filter Based On medium</h4>
+          <button id="filter-Tempera-on-Canvas" class="u-full-width button button-primary">
+            Tempera on Canvas
+          </button>
+          <button
+            id="filter-Oil-on-Canvas"
+            class="u-full-width button button-primary"
+          >
+          Oil on Canvas
+          </button>
+        </div>
+
+        <div class="columns eight main">
+          <div class="search-arts-wrapper" id="search-arts-wrapper">
+            <select id="search-by-select">
+              <option value="">Search By</option>
+              <option value="title">title</option>
+              <option value="artist">artist</option>
+            </select>
+            <input
+              type="text"
+              id="search-by-input"
+              placeholder="Enter title/artist here"
+            />
+            <button
+              id="search-by-button"
+              style="background-color: #33c3f0; color: white; border: none"
+            >
+              Search
+            </button>
+          </div>
+          <div class="data-list-wrapper" id="data-list-wrapper">
+            <!-- append card-list that includes card here -->
+          </div>
+          <div class="pagination-wrapper" id="pagination-wrapper">
+            <!-- append the pagination button here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./scripts/index.js" type="module"></script>
+  </body>
+</html>
