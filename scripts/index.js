@@ -53,10 +53,13 @@ let searchByButton = document.getElementById("search-by-button");
 
 // Main code
 
-async function loadpage() {
+async function loadpage(page,qparams) {
   let cardlist = document.createElement("div");
   cardlist.className = "card-list";
-  let res = await fetch(`${artURL}?_page=1&_limit=5`)
+  
+  let res = await fetch(`${artURL}?_page=${page}&_limit=5${qparams}`)
+  let total = res.headers.get('X-Total-Count')
+  let pagecount = Math.ceil(total/5);
   let data = await res.json()
   console.log(data)
   data.forEach(sample => {
@@ -64,6 +67,7 @@ async function loadpage() {
     cardlist.append(cards)
   })
   mainSection.append(cardlist)
+  pagination(pagecount,qparams)
 
 }
 loadpage();
@@ -126,7 +130,17 @@ function createCard(sample){
     card.append(body);
     return card;
 }
+function pagination(pagecount,qparams){
+  for(let i =1;i<=pagecount;i++){
+    let button = document.createElement('button')
+    button.innerText = i;
+    button.addEventListener('click',() =>{
+      mainSection.innerHTML = ""
+      paginationWrapper.innerHTML = ""
+      loadpage(i,qparams)
+    })
+    paginationWrapper.append(button)
+  }
+}
 
 
-// cardlist.append(card);
-// mainSection.append(cardlist);
