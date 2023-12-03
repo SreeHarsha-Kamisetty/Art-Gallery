@@ -8,7 +8,19 @@ const baseServerURL = `http://localhost:${
 const artURL = `${baseServerURL}/arts`;
 let mainSection = document.getElementById("data-list-wrapper");
 let paginationWrapper = document.getElementById("pagination-wrapper");
-
+let sample = {
+  id: 1,
+  title: "Starry Night",
+  artist: "Vincent van Gogh",
+  year: 1889,
+  medium: "Oil on Canvas",
+  price: 100000,
+  details: {
+    paintbrushes: ["Round", "Flat"],
+    solvents: ["Turpentine", "Mineral Spirits"],
+  },
+  image: "./server-files/images/StarryNight.jpg",
+};
 // art
 let artTitleInput = document.getElementById("art-title");
 let artImageInput = document.getElementById("art-image");
@@ -19,6 +31,31 @@ let artPriceInput = document.getElementById("art-price");
 let artMediumInput = document.getElementById("art-medium");
 let artCreateBtn = document.getElementById("add-art");
 
+artCreateBtn.addEventListener('click',() =>{
+  addArt();
+})
+async function addArt(){
+  let res = await fetch(artURL,{
+    method : "POST",
+    headers : {
+      "Content-type" : "application/json",
+    },
+    body:JSON.stringify({
+      title : artTitleInput.value,
+      image: artImageInput.value,
+      artist: artartistInput.value,
+      year: Number(artYearInput.value),
+      details: {
+        painbrushes : [artPaintBrushesInput.value]
+      },
+      price: Number(artPriceInput.value),
+      medium : artMediumInput.value
+    })
+  })
+  let data = await res.json()
+  console.log(data);
+  loadpage(1)
+}
 // Update art
 let updateArtIdInput = document.getElementById("update-art-id");
 let updateArtTitleInput = document.getElementById("update-art-title");
@@ -31,6 +68,36 @@ let updateArtPaintBrushesInput = document.getElementById(
 let updateArtPriceInput = document.getElementById("update-art-price");
 let updateArtMediumInput = document.getElementById("update-art-medium");
 let updateArtBtn = document.getElementById("update-art");
+
+updateArtBtn.addEventListener('click',(e) =>{
+  let id = updateArtIdInput.value
+  updateArt(id);
+})
+async function updateArt(id){
+  let res = await fetch(`${artURL}/${id}`,{
+    method : "PATCH",
+    headers :{
+      "Content-type" : "application/json"
+    },
+    body: JSON.stringify({
+      title: updateArtTitleInput.value,
+      image: updateArtImageInput.value,
+      artist : updateArtartistInput.value,
+      year: Number(updateArtYearInput.value),
+      details :{
+        paintbrushes:[updateArtPaintBrushesInput.value]
+      },
+      price: Number(updateArtPriceInput.value),
+      medium : updateArtMediumInput.value
+
+    })
+  })
+  let data = await res.json();
+  console.log(data)
+  loadpage(1);
+}
+
+
 
 //Update price
 let updatePackageArtId = document.getElementById("update-package-art-id");
@@ -53,10 +120,12 @@ let searchByButton = document.getElementById("search-by-button");
 
 // Main code
 
-async function loadpage(page,qparams) {
+async function loadpage(page,qparams="") {
   let cardlist = document.createElement("div");
   cardlist.className = "card-list";
-  
+  cardlist.innerHTML = ""
+  mainSection.innerHTML = ""
+  paginationWrapper.innerHTML = ""
   let res = await fetch(`${artURL}?_page=${page}&_limit=5${qparams}`)
   let total = res.headers.get('X-Total-Count')
   let pagecount = Math.ceil(total/5);
@@ -70,20 +139,8 @@ async function loadpage(page,qparams) {
   pagination(pagecount,qparams)
 
 }
-loadpage();
-let sample = {
-  id: 1,
-  title: "Starry Night",
-  artist: "Vincent van Gogh",
-  year: 1889,
-  medium: "Oil on Canvas",
-  price: 100000,
-  details: {
-    paintbrushes: ["Round", "Flat"],
-    solvents: ["Turpentine", "Mineral Spirits"],
-  },
-  image: "./server-files/images/StarryNight.jpg",
-};
+loadpage(1);
+
 function createCard(sample){
     let card = document.createElement("div");
     card.className = "card";
@@ -108,7 +165,7 @@ function createCard(sample){
     year.innerText = `year : ${sample.year}`;
     let paintbrushes = document.createElement("p");
     paintbrushes.className = "card-paintbrushes";
-    paintbrushes.innerText = `paintbrushes : ${sample.details.painbrushes}`;
+    paintbrushes.innerText = `paintbrushes : ${sample.details.paintbrushes}`;
     let price = document.createElement("p");
     price.className = "card-price";
     price.innerText = sample.price;
@@ -120,6 +177,11 @@ function createCard(sample){
     link.setAttribute("class", "card-link");
     link.dataset.id = sample.id;
     link.innerText = "Edit";
+    link.addEventListener('click',(e) =>{
+      e.preventDefault();
+      updateArtIdInput.value = sample.id
+      updatePackageArtId.value = sample.id
+    })
     let button = document.createElement("button");
     button.dataset.id = sample.id;
     button.className = "card-button";
@@ -143,4 +205,15 @@ function pagination(pagecount,qparams){
   }
 }
 
+// async function Delete(id){
+//   let res = await fetch(`${artURL}/${id}`,{
+//     method : "DELETE",
+//     headers :{
+//       "Content-type" : "application/json"
+//     }
+//   })
+//   let data = await res.json();
+//   console.log(data)
+// }
+// Delete(26)
 

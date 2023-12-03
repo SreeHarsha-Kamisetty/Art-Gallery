@@ -3,18 +3,13 @@
     {
       "id": 1,
       "title": "Starry Night",
-      "artist": "Vincent van Gogh",
+      "artist": "Vincent Van Gogh",
       "year": 1889,
       "medium": "Oil on Canvas",
-      "price": 100000,
+      "price": 999999,
       "details": {
         "paintbrushes": [
-          "Round",
-          "Flat"
-        ],
-        "solvents": [
-          "Turpentine",
-          "Mineral Spirits"
+          "Round,Flat"
         ]
       },
       "image": "./server-files/images/StarryNight.jpg"
