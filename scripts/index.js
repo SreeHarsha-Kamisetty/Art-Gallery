@@ -182,6 +182,9 @@ function createCard(sample) {
   button.dataset.id = sample.id;
   button.className = "card-button";
   button.innerText = "Delete";
+  button.addEventListener('click',()=>{
+    Delete(sample.id)
+  })
 
   card.append(img);
   body.append(title, artist, year, paintbrushes, price, medium, link, button);
@@ -201,14 +204,15 @@ function pagination(pagecount, qparams) {
   }
 }
 
-// async function Delete(id){
-//   let res = await fetch(`${artURL}/${id}`,{
-//     method : "DELETE",
-//     headers :{
-//       "Content-type" : "application/json"
-//     }
-//   })
-//   let data = await res.json();
-//   console.log(data)
-// }
+async function Delete(id){
+  let res = await fetch(`${artURL}/${id}`,{
+    method : "DELETE",
+    headers :{
+      "Content-type" : "application/json"
+    }
+  })
+  let data = await res.json();
+  console.log(data)
+  loadpage(1)
+}
 // Delete(26)
