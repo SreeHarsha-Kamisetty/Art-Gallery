@@ -103,18 +103,53 @@ let updatePackageArtPackage = document.getElementById(
 );
 let updatePackageArtBtn = document.getElementById("update-package-art");
 
+updatePackageArtBtn.addEventListener('click',(e) =>{
+  let id = updatePackageArtId.value
+  updatePrice(id);
+})
+async function updatePrice(id) {
+  let res = await fetch(`${artURL}/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+     
+      price: Number(updatePackageArtPackage.value),
+     
+    }),
+  });
+  let data = await res.json();
+  console.log(data);
+  loadpage(1);
+}
 //sort and filter
 let sortAtoZBtn = document.getElementById("sort-low-to-high");
 let sortZtoABtn = document.getElementById("sort-high-to-low");
 let filterTemperaOnCanvas = document.getElementById("filter-Tempera-on-Canvas");
 let filterOilOnCanvas = document.getElementById("filter-Oil-on-Canvas");
 
+sortAtoZBtn.addEventListener('click',(e) =>{
+  loadpage(1,"&_sort=price&_order=asc")
+})
+sortZtoABtn.addEventListener('click',(e) =>{
+  loadpage(1,"&_sort=price&_order=desc")
+})
+filterOilOnCanvas.addEventListener('click',(e) =>{
+  loadpage(1,"&medium=Oil on Canvas")
+})
+filterTemperaOnCanvas.addEventListener('click',(e) =>{
+  loadpage(1,"&medium=Tempera on Canvas")
+})
 //Search by title/colour
 
 let searchBySelect = document.getElementById("search-by-select");
 let searchByInput = document.getElementById("search-by-input");
 let searchByButton = document.getElementById("search-by-button");
 
+searchByButton.addEventListener('click',(e) =>{
+  loadpage(1,`&${searchBySelect.value}=${searchByInput.value}`)
+})
 // Main code
 
 async function loadpage(page, qparams = "") {
