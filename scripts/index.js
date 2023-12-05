@@ -1,26 +1,21 @@
 // --- do not touch  ↓↓↓↓↓↓↓↓↓↓↓↓ ----------
-const baseServerURL = `http://localhost:${
-  import.meta.env.REACT_APP_JSON_SERVER_PORT
-}`;
+// const baseServerURL = `http://localhost:${
+//   import.meta.env.REACT_APP_JSON_SERVER_PORT
+// }`;
+const baseServerURL = 'https://656f0b456529ec1c623735b3.mockapi.io'
+// const baseServerURL = process.env.REACT_APP_JSON_SERVER_PORT
+//   ? `http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}`
+//   : 'http://localhost:8080'; // Replace defaultPort with your default port number
+
+
 // --- do not touch  ↑↑↑↑↑↑↑↑↑↑↑↑ ----------
 
 // ***** Constants / Variables ***** //
 const artURL = `${baseServerURL}/arts`;
+
 let mainSection = document.getElementById("data-list-wrapper");
 let paginationWrapper = document.getElementById("pagination-wrapper");
-let sample = {
-  id: 1,
-  title: "Starry Night",
-  artist: "Vincent van Gogh",
-  year: 1889,
-  medium: "Oil on Canvas",
-  price: 100000,
-  details: {
-    paintbrushes: ["Round", "Flat"],
-    solvents: ["Turpentine", "Mineral Spirits"],
-  },
-  image: "./server-files/images/StarryNight.jpg",
-};
+
 // art
 let artTitleInput = document.getElementById("art-title");
 let artImageInput = document.getElementById("art-image");
@@ -31,8 +26,15 @@ let artPriceInput = document.getElementById("art-price");
 let artMediumInput = document.getElementById("art-medium");
 let artCreateBtn = document.getElementById("add-art");
 
-artCreateBtn.addEventListener("click", () => {
+artCreateBtn.addEventListener("click", (e) => {
   addArt();
+  artTitleInput.value = "";
+  artImageInput.value = "";
+  artartistInput.value = "";
+  artYearInput.value = "";
+  artPaintBrushesInput.value = "";
+  artPriceInput.value = "";
+  artMediumInput.value = "";
 });
 async function addArt() {
   let res = await fetch(artURL, {
@@ -42,19 +44,20 @@ async function addArt() {
     },
     body: JSON.stringify({
       title: artTitleInput.value,
-      image: artImageInput.value,
       artist: artartistInput.value,
       year: Number(artYearInput.value),
-      details: {
-        painbrushes: [artPaintBrushesInput.value],
-      },
-      price: Number(artPriceInput.value),
       medium: artMediumInput.value,
+      price: Number(artPriceInput.value),
+      details: {
+        paintbrushes: [artPaintBrushesInput.value],
+        solvents: ["Turpentine", "Mineral Spirits"],
+      },
+      image: artImageInput.value,
     }),
   });
   let data = await res.json();
-  console.log(data);
-  loadpage(1);
+
+  loadPage(1);
 }
 // Update art
 let updateArtIdInput = document.getElementById("update-art-id");
@@ -73,29 +76,32 @@ updateArtBtn.addEventListener("click", (e) => {
   let id = updateArtIdInput.value;
   updateArt(id);
 });
+
 async function updateArt(id) {
-  let res = await fetch(`${artURL}/${id}`, {
-    method: "PATCH",
+  let posturl = `${baseServerURL}/arts/${id}`;
+
+  let res = await fetch(posturl, {
+    method: "PUT",
     headers: {
       "Content-type": "application/json",
     },
     body: JSON.stringify({
       title: updateArtTitleInput.value,
-      image: updateArtImageInput.value,
       artist: updateArtartistInput.value,
       year: Number(updateArtYearInput.value),
+      medium: updateArtMediumInput.value,
+      price: Number(updateArtPriceInput.value),
       details: {
         paintbrushes: [updateArtPaintBrushesInput.value],
+        solvents: ["Turpentine", "Mineral Spirits"],
       },
-      price: Number(updateArtPriceInput.value),
-      medium: updateArtMediumInput.value,
+      image: updateArtImageInput.value,
     }),
   });
   let data = await res.json();
-  console.log(data);
-  loadpage(1);
-}
 
+  loadPage(1);
+}
 //Update price
 let updatePackageArtId = document.getElementById("update-package-art-id");
 let updatePackageArtPackage = document.getElementById(
@@ -103,45 +109,113 @@ let updatePackageArtPackage = document.getElementById(
 );
 let updatePackageArtBtn = document.getElementById("update-package-art");
 
+updatePackageArtBtn.addEventListener("click", (e) => {
+  let id = updatePackageArtId.value;
+  updatePrice(id);
+});
+
+async function updatePrice(id) {
+  let posturl = `${baseServerURL}/arts/${id}`;
+
+  let res = await fetch(posturl, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+      price: Number(updatePackageArtPackage.value),
+    }),
+  });
+  let data = await res.json();
+
+  loadPage(1);
+}
 //sort and filter
 let sortAtoZBtn = document.getElementById("sort-low-to-high");
 let sortZtoABtn = document.getElementById("sort-high-to-low");
 let filterTemperaOnCanvas = document.getElementById("filter-Tempera-on-Canvas");
 let filterOilOnCanvas = document.getElementById("filter-Oil-on-Canvas");
 
+sortAtoZBtn.addEventListener("click", (e) => {
+  loadPage(1, "sortby=price&order=asc");
+});
+sortZtoABtn.addEventListener("click", (e) => {
+  loadPage(1, "sortby=price&order=desc");
+});
+filterOilOnCanvas.addEventListener("click", (e) => {
+  loadPage(1, "medium=Oil on Canvas");
+});
+filterTemperaOnCanvas.addEventListener("click", (e) => {
+  loadPage(1, "medium=Tempera on Canvas");
+});
+
 //Search by title/colour
 
 let searchBySelect = document.getElementById("search-by-select");
 let searchByInput = document.getElementById("search-by-input");
 let searchByButton = document.getElementById("search-by-button");
+searchByButton.addEventListener('click',(e) =>{
+  console.log(`The selected option is ${searchBySelect.value}`)
+  console.log(`Selected artist is ${searchByInput.value}`)
+  loadPage(1,`${searchBySelect.value}=${searchByInput.value}`);
+})
+//Arts Data
+let artsData = [];
+let queryParamString = null;
+let pageNumber = 1;
 
-// Main code
+let sample = {
+  id: 1,
+  title: "Starry Night",
+  artist: "Vincent van Gogh",
+  year: 1889,
+  medium: "Oil on Canvas",
+  price: "1000",
+  details: {
+    paintbrushes: ["Round", "Flat"],
+    solvents: ["Turpentine", "Mineral Spirits"],
+  },
+  image: "./server-files/images/StarryNight.jpg",
+};
 
-async function loadpage(page, qparams = "") {
+async function loadPage(page, qparams = "") {
+  let url = `${baseServerURL}/arts?page=${page}&limit=5&${qparams}`;
   let cardlist = document.createElement("div");
-  cardlist.className = "card-list";
-  cardlist.innerHTML = "";
+  cardlist.setAttribute("class", "card-list");
   mainSection.innerHTML = "";
   paginationWrapper.innerHTML = "";
-  let res = await fetch(`${artURL}?_page=${page}&_limit=5${qparams}`);
-  let total = res.headers.get("X-Total-Count");
-  let pagecount = Math.ceil(total / 5);
+  let res = await fetch(url);
   let data = await res.json();
-  console.log(data);
-  data.forEach((sample) => {
-    let cards = createCard(sample);
+  console.log(data)
+  let totalcount = data.count;
+  let data1 = data.items
+  console.log(data1)
+  let pagecount = Math.ceil(totalcount / 5);
+  data1.forEach((item) => {
+    let cards = createCard(item);
     cardlist.append(cards);
   });
   mainSection.append(cardlist);
   pagination(pagecount, qparams);
 }
-loadpage(1);
 
+loadPage(1);
+function pagination(pagecount, qparams) {
+  for (let page = 1; page <= pagecount; page++) {
+    let button = document.createElement("button");
+    button.innerText = page;
+    button.addEventListener("click", (e) => {
+      mainSection.innerHTML = "";
+      paginationWrapper.innerHTML = "";
+      loadPage(button.innerText, qparams);
+    });
+    paginationWrapper.append(button);
+  }
+}
 function createCard(sample) {
   let card = document.createElement("div");
-  card.className = "card";
-  card.dataset.id = sample.id;
-
+  card.setAttribute("class", "card");
+  card.setAttribute("data-id", sample.id);
   let img = document.createElement("div");
   img.setAttribute("class", "card-img");
   let imgsrc = document.createElement("img");
@@ -151,68 +225,67 @@ function createCard(sample) {
   let body = document.createElement("div");
   body.setAttribute("class", "card-body");
   let title = document.createElement("h5");
-  title.className = "card-title";
+  title.setAttribute("class", "card-title");
   title.innerText = `Art title : ${sample.title}`;
   let artist = document.createElement("p");
-  artist.className = "card-artist";
+  artist.setAttribute("class", "card-artist");
   artist.innerText = sample.artist;
   let year = document.createElement("p");
-  year.className = "card-year";
+  year.setAttribute("class", "card-year");
   year.innerText = `year : ${sample.year}`;
   let paintbrushes = document.createElement("p");
-  paintbrushes.className = "card-paintbrushes";
-  paintbrushes.innerText = `paintbrushes : ${sample.details.paintbrushes}`;
-  let price = document.createElement("p");
-  price.className = "card-price";
+  paintbrushes.setAttribute("class", "card-paintbrushes");
+  
+  paintbrushes.innerText = `paintbrushes : ${sample.paintbrushes}`;
+  let price = document.createElement("card-price");
+  price.setAttribute("class", "card-price");
   price.innerText = sample.price;
   let medium = document.createElement("p");
-  medium.className = "card-medium";
+  medium.setAttribute("class", "card-medium");
   medium.innerText = sample.medium;
   let link = document.createElement("a");
   link.setAttribute("href", "#");
+  link.setAttribute("data-id", sample.id);
   link.setAttribute("class", "card-link");
-  link.dataset.id = sample.id;
   link.innerText = "Edit";
   link.addEventListener("click", (e) => {
     e.preventDefault();
     updateArtIdInput.value = sample.id;
-    updatePackageArtId.value = sample.id;
-  });
-  let button = document.createElement("button");
-  button.dataset.id = sample.id;
-  button.className = "card-button";
-  button.innerText = "Delete";
-  button.addEventListener('click',()=>{
-    Delete(sample.id)
-  })
+    updateArtTitleInput.value = sample.title;
+    updateArtImageInput.value = sample.image;
+    updateArtPaintBrushesInput.value = sample.paintbrushes;
+    updateArtartistInput.value = sample.artist;
+    updateArtYearInput.value = sample.year;
+    updateArtPriceInput.value = sample.price;
+    updateArtMediumInput.value = sample.medium;
 
-  card.append(img);
-  body.append(title, artist, year, paintbrushes, price, medium, link, button);
-  card.append(body);
+    updatePackageArtId.value = sample.id;
+    updatePackageArtPackage.value = sample.price;
+  });
+  let del = document.createElement("button");
+  del.setAttribute("data-id", sample.id);
+  del.setAttribute("class", "card-button");
+  del.innerText = "Delete";
+  del.addEventListener("click", (e) => {
+    let id = sample.id;
+    deleteArt(id);
+  });
+  body.append(title, artist, year, paintbrushes, price, medium, link, del);
+  card.append(img, body);
   return card;
 }
-function pagination(pagecount, qparams) {
-  for (let i = 1; i <= pagecount; i++) {
-    let button = document.createElement("button");
-    button.innerText = i;
-    button.addEventListener("click", () => {
-      mainSection.innerHTML = "";
-      paginationWrapper.innerHTML = "";
-      loadpage(i, qparams);
-    });
-    paginationWrapper.append(button);
-  }
-}
+async function deleteArt(id) {
+  let posturl = `${baseServerURL}/arts/${id}`;
 
-async function Delete(id){
-  let res = await fetch(`${artURL}/${id}`,{
-    method : "DELETE",
-    headers :{
-      "Content-type" : "application/json"
-    }
-  })
+  let res = await fetch(posturl, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
   let data = await res.json();
-  console.log(data)
-  loadpage(1)
+  console.log(data);
+  loadPage(1);
 }
-// Delete(26)
+// cardlist.append(card)
+// mainSection.append(cardlist)
