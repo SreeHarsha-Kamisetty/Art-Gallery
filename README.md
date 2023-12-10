@@ -30,5 +30,5 @@ Welcome to the Art Gallery web application! This project allows you to manage an
 - Add Art :
      <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/ff5dfb30-58f3-4a2b-b0bc-02a689cf03b5" alt="Mount Fuji">
 With the following data:
-<img src="(https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/0666f02b-c34d-4283-a0a2-c97121aef300" alt="Add Art">
+<img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/0666f02b-c34d-4283-a0a2-c97121aef300" alt="Add Art">
 
