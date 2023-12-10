@@ -39,14 +39,14 @@ Welcome to the Art Gallery web application! This project allows you to manage an
   Updated the price to 1200 . Updated art
   <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/d05e5447-af99-4408-ab0b-849c2c6dac54" alt="">
 - Update Price:
-   Updating price to 10000
-  <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/fed2d46e-d135-4288-8fb5-305850207572" alt="">
-  <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/24e5b3aa-297d-4c59-a730-3482dd03b618" alt="">
+Updating price to 10000
+<img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/fed2d46e-d135-4288-8fb5-305850207572" alt="">
+<img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/24e5b3aa-297d-4c59-a730-3482dd03b618" alt="">
 - Sorting (Low to High):
-     <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/6c184f35-1cd1-47ef-b5d7-9c287387e1d1" alt="">
+<img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/6c184f35-1cd1-47ef-b5d7-9c287387e1d1" alt="">
 - Sorting (High to Low):
-      <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/38e3dc2c-7696-4c04-a3f3-6a52fa79790b" alt="">
+<img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/38e3dc2c-7696-4c04-a3f3-6a52fa79790b" alt="">
   - Filter (Tempera on Canvas):
-       <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/5f55cabe-999d-4935-b083-5b089334e37a" alt="">
+  <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/5f55cabe-999d-4935-b083-5b089334e37a" alt="">
   - Filter (Oil on Canvas)
-         <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/69872d98-f213-4faf-83c3-fd3c2232c350" alt="">
+  <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/69872d98-f213-4faf-83c3-fd3c2232c350" alt="">
