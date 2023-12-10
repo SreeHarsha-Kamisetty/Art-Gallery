@@ -24,4 +24,4 @@ Welcome to the Art Gallery web application! This project allows you to manage an
 **CSS:** For styling 
 **JavaScript:** For the functionality of the features 
 **Netlify:** To deploy the website. <a href = 'https://art-gallery-123.netlify.app/'> Art-Gallery</a>
-** GIT:** For Collaboration
+**GIT version control:** For Collaboration
