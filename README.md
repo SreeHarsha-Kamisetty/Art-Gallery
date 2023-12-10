@@ -20,8 +20,8 @@ Welcome to the Art Gallery web application! This project allows you to manage an
    git clone https://github.com/SreeHarsha-Kamisetty/art-gallery.git
 
 ## Tech Stack 
-**HTML:** For the main body of the website
-**CSS:** For styling 
-**JavaScript:** For the functionality of the features 
-**Netlify:** To deploy the website. <a href = 'https://art-gallery-123.netlify.app/'> Art-Gallery</a>
-**GIT version control:** For Collaboration
+- **HTML:** For the main body of the website
+- **CSS:** For styling 
+- **JavaScript:** For the functionality of the features 
+- **Netlify:** To deploy the website. <a href = 'https://art-gallery-123.netlify.app/'> Art-Gallery</a>
+- **GIT version control:** For Collaboration
