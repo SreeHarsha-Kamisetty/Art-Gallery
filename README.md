@@ -25,7 +25,7 @@ Welcome to the Art Gallery web application! This project allows you to manage an
 - **JavaScript:** For the functionality of the features 
 - **Netlify:** To deploy the website. <a href="https://art-gallery-123.netlify.app/" target="_blank" rel="noopener noreferrer" >Art Gallery</a>
 
-- **GIT version control:** For Collaboration
+- **GIT version control**
 ## Screenshots
 - Add Art :
      <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/ff5dfb30-58f3-4a2b-b0bc-02a689cf03b5" alt="Mount Fuji">
