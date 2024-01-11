@@ -35,7 +35,7 @@ Welcome to the Art Gallery web application! This project allows you to manage an
 
 ## Update Art:
   On click of the "Edit" button all fields in the update section will be filled with the current values and users can edit the fields they want to change and click on "update all fields"
-  - <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/e7f744ac-1da8-42fb-82ee-983bd8b9c849" alt="">
+   <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/e7f744ac-1da8-42fb-82ee-983bd8b9c849" alt="">
   - Updated the price to 1200 . 
   - Updated art
 - <img src="https://github.com/SreeHarsha-Kamisetty/Art-Gallery/assets/146928943/d05e5447-af99-4408-ab0b-849c2c6dac54" alt="">
