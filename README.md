@@ -7,7 +7,7 @@ Welcome to the Art Gallery web application! This project allows you to manage an
 - [Features](#features)
 - [Gettin Started](#getting-started)
 - [Screenshots](#screenshots)
-- [Team Members](#team-members)
+- [Contribution](#contribution)
 
 ## Tech Stack 
 - **HTML:** For the main body of the website
